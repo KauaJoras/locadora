@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Locadora{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="/items">Catálogo</a>
+        <a href="/rentals">Aluguéis</a>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

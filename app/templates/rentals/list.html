@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Aluguéis{% endblock %}
+
+{% block content %}
+  <h1>Aluguéis</h1>
+
+  {% if rentals %}
+    {% for rental in rentals %}
+      <div>
+        <p>{{ rental }}</p>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Nenhum aluguel no momento</p>
+  {% endif %}
+{% endblock %}
