@@ -7,6 +7,12 @@ class Rental:
         self.start_date = start_date
         self.due_date = due_date
 
+    def __str__(self):
+        return f"{self.item.title} — {self.user.name} | Devolução: {self.due_date.strftime('%d/%m/%Y')}"
+
+    def __repr__(self):
+        return self.__str__()
+
     def return_item(self):
         self.item.is_available = True
 

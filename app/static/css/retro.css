@@ -1,58 +1,270 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
+/* =============================================
+   LAYOUT DA LOCADORA (CATÁLOGO)
+   ============================================= */
 body {
-    background: #16142a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    font-family: 'Press Start 2P', 'Courier New', monospace;
-    color: #4ade80;
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background:
+        radial-gradient(circle at top, rgba(255,255,255,0.08), transparent 25%),
+        linear-gradient(180deg, #111111 0%, #2a2a2a 45%, #1b1b1b 100%);
+    color: #edf7ff;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
-/* Canvas de fundo — cobre tudo, fica atrás */
-#starCanvas {
+body::before {
+    content: "";
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.12) 0 1px, transparent 1px),
+        radial-gradient(circle at 70% 30%, rgba(255,255,255,0.08) 0 1px, transparent 1px),
+        radial-gradient(circle at 40% 70%, rgba(255,255,255,0.10) 0 1px, transparent 1px),
+        radial-gradient(circle at 80% 75%, rgba(255,255,255,0.06) 0 1px, transparent 1px);
+    background-size: 180px 180px, 220px 220px, 260px 260px, 300px 300px;
+    opacity: 0.35;
+    pointer-events: none;
     z-index: 0;
 }
 
-/* A TV fica por cima do canvas */
+#starCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    z-index: 0;
+}
+
 .crt-tv-container {
     position: relative;
-    z-index: 10;
-    /* ... resto do CSS da TV que passamos antes ... */
+    z-index: 1;
+    min-height: 100vh;
+    padding: 18px 14px 40px;
 }
 
-/* Logo RetroVerso */
+.crt-bezel {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    background: rgba(17, 18, 24, 0.55);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+    padding: 10px;
+}
+
+.crt-screen {
+    min-height: calc(100vh - 56px);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(18, 20, 28, 0.92), rgba(11, 13, 21, 0.96));
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03), inset 0 0 18px rgba(0, 0, 0, 0.25);
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+}
+
+.crt-screen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(rgba(255,255,255,0.02) 50%, rgba(0,0,0,0.05) 50%),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 4px);
+    background-size: 100% 4px, 100% 4px;
+    mix-blend-mode: soft-light;
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.crt-screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.03) 0 1px, transparent 1px),
+        radial-gradient(circle at 70% 35%, rgba(255,255,255,0.03) 0 1px, transparent 1px),
+        radial-gradient(circle at 55% 75%, rgba(255,255,255,0.04) 0 1px, transparent 1px);
+    background-size: 160px 160px, 210px 210px, 260px 260px;
+    opacity: 0.18;
+    pointer-events: none;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+.store-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
 .logo-retroverso {
-    font-family: 'Press Start 2P', monospace;
     font-size: 2.2rem;
-    letter-spacing: 4px;
-    background: linear-gradient(
-        90deg,
-        #ff4e4e 0%, #ff944e 12%, #ffe94e 25%,
-        #6eff6e 38%, #4edfff 52%, #6e6eff 65%,
-        #d44eff 78%, #ff4eaa 90%, #ff4e4e 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    -webkit-text-stroke: 3px #1a1728;
-    paint-order: stroke fill;
-    filter: drop-shadow(0 0 10px rgba(180,100,255,0.5));
+    color: #4ade80;
+    text-shadow: 0 0 10px #4ade80, 0 0 20px #4ade80, 0 0 30px #2a8a4d;
+    margin-bottom: 5px;
+    letter-spacing: 2px;
 }
 
-nav a {
-    font-family: 'Press Start 2P', monospace;
-    font-size: 0.6rem;
-    color: #ccd6f6;
-    text-decoration: none;
-    letter-spacing: 2px;
-    text-shadow: 0 0 8px rgba(150,200,255,0.6);
+.subtitle {
+    font-size: 0.7rem;
+    color: #8ce8a9;
+    text-shadow: 0 0 5px #8ce8a9;
 }
-nav a:hover { color: #fff; }
+
+/* Grid da prateleira */
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 22px;
+    padding: 8px 4px 18px;
+    align-items: stretch;
+}
+
+/* O cartão (Caixa da Fita) */
+.item-card {
+    background: linear-gradient(180deg, rgba(24, 25, 33, 0.92), rgba(11, 13, 21, 0.98));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 10px 10px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25), inset 0 0 10px rgba(255, 255, 255, 0.03);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    min-height: 100%;
+}
+
+.item-card:hover {
+    transform: scale(1.02);
+    border-color: #4ade80;
+    box-shadow: 0 0 15px rgba(74, 222, 128, 0.4), inset 0 0 15px rgba(74, 222, 128, 0.2);
+}
+
+.img-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    margin-bottom: 10px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    background: linear-gradient(145deg, #0f1118, #181b25);
+    box-shadow: inset 0 0 12px rgba(0,0,0,0.6);
+}
+
+.item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(25%) contrast(110%) brightness(88%);
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.item-card:hover .item-image {
+    transform: scale(1.03);
+}
+
+/* =============================================
+   MÁGICA DO VHS 3D
+   ============================================= */
+.scene {
+    width: 170px;
+    height: 240px;
+    margin: 8px auto 10px;
+    perspective: 1100px;
+}
+
+.vhs-box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: spinVHS 18s linear infinite;
+    transform: translateZ(-18px) rotateX(10deg) rotateY(0deg);
+}
+
+/* Pause a animação caso o usuário passe o mouse (Opcional, mas fica legal!) */
+.scene:hover .vhs-box {
+    animation-play-state: paused;
+}
+
+/* =============================================
+   ANIMAÇÃO DE ROTAÇÃO CONTÍNUA
+   ============================================= */
+@keyframes spinVHS {
+    0% { transform: translateZ(-18px) rotateX(10deg) rotateY(0deg); }
+    50% { transform: translateZ(-18px) rotateX(8deg) rotateY(180deg); }
+    100% { transform: translateZ(-18px) rotateX(10deg) rotateY(360deg); }
+}
+.vhs-face {
+    position: absolute;
+    /* Textura da caixa plástica preta do VHS */
+    background: #111; 
+    border: 1px solid #333;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+}
+
+/* Tamanhos das Faces da Caixa */
+.vhs-front, .vhs-back { width: 170px; height: 240px; }
+.vhs-right, .vhs-left { width: 42px; height: 240px; left: 64px; }
+.vhs-top, .vhs-bottom { width: 170px; height: 42px; top: 99px; }
+
+/* "Dobrando" a caixa no espaço 3D */
+.vhs-front  { transform: rotateY(0deg) translateZ(21px); overflow: hidden; border-radius: 10px; }
+.vhs-back   { transform: rotateY(180deg) translateZ(21px); border-radius: 10px; background: linear-gradient(145deg, #121212, #232323); }
+.vhs-right  { transform: rotateY(90deg) translateZ(85px); background: #0c0d12; border-radius: 0 8px 8px 0; }
+.vhs-left   { transform: rotateY(-90deg) translateZ(85px); background: linear-gradient(180deg, #1b1930, #0f1320); display:flex; align-items:center; justify-content:center; border-radius: 8px 0 0 8px; }
+.vhs-top    { transform: rotateX(90deg) translateZ(120px); background: #080b12; border-radius: 8px; }
+.vhs-bottom { transform: rotateX(-90deg) translateZ(120px); background: #080b12; border-radius: 8px; }
+
+.vhs-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(18%) contrast(108%) brightness(92%);
+}
+
+.vhs-front .overlay {
+    z-index: 2;
+}
+
+/* O título que vai na lombada (lado esquerdo) da caixa */
+.spine-title {
+    transform: rotate(90deg);
+    color: #8ce8a9;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-shadow: 0 0 6px rgba(140,232,169,0.35);
+}
+
+/* Botão Retro */
+.rent-btn {
+    width: 100%;
+    padding: 8px;
+    background: transparent;
+    border: 1px solid #4ade80;
+    color: #4ade80;
+    font-family: inherit;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.rent-btn:hover:not([disabled]) {
+    background: #4ade80;
+    color: #16142a;
+    box-shadow: 0 0 10px #4ade80;
+}
+
+.rent-btn[disabled] {
+    border-color: #ff4e4e;
+    color: #ff4e4e;
+    cursor: not-allowed;
+    opacity: 0.6;
+}

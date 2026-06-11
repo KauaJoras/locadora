@@ -3,15 +3,28 @@
 {% block title %}Aluguéis{% endblock %}
 
 {% block content %}
-  <h1>Aluguéis</h1>
+  <div class="store-header">
+    <h1 class="logo-retroverso">ALUGUÉIS</h1>
+    <p class="subtitle">Itens atualmente alugados</p>
+  </div>
 
   {% if rentals %}
-    {% for rental in rentals %}
-      <div>
-        <p>{{ rental }}</p>
-      </div>
-    {% endfor %}
+    <div class="catalog-grid rentals-grid">
+      {% for rental in rentals %}
+        <article class="item-card rental-card">
+          <div class="img-container">
+            <img src="{{ rental.item.image }}" alt="Capa de {{ rental.item.title }}" class="item-image">
+            <span class="overlay rented">ALUGADO</span>
+          </div>
+          <h3 class="item-title">{{ rental.item.title }}</h3>
+          <p class="item-info">Cliente: {{ rental.user.name }}<br>Devolução: {{ rental.due_date.strftime('%d/%m/%Y') }}</p>
+          <form method="post" action="{{ url_for('rentals.return_rental', rental_index=loop.index0) }}" class="rent-form">
+            <button type="submit" class="rent-btn">DEVOLVER</button>
+          </form>
+        </article>
+      {% endfor %}
+    </div>
   {% else %}
-    <p>Nenhum aluguel no momento</p>
+    <p class="empty-state">Nenhum aluguel no momento.</p>
   {% endif %}
 {% endblock %}

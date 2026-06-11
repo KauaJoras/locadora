@@ -1,14 +1,45 @@
 {% extends "base.html" %}
 
-{% block title %}Catálogo{% endblock %}
+{% block title %}Retroverso{% endblock %}
 
 {% block content %}
-  <h1>Catálogo</h1>
+  <div class="store-header">
+    <h1 class="logo-retroverso">RETROVERSO</h1>
+    <p class="subtitle">Filmes e games em destaque</p>
+  </div>
 
-  {% for item in items %}
-    <div>
-      <h3>{{ item.title }}</h3>
-      <p>{{ "Disponível" if item.is_available else "Alugado" }}</p>
-    </div>
-  {% endfor %}
+  <div class="catalog-grid">
+    {% for item in items %}
+      <article class="item-card">
+        <div class="scene">
+          <div class="vhs-box">
+            <div class="vhs-face vhs-front">
+              <img src="{{ item.image }}" alt="Capa do {{ item.title }}" class="item-image">
+              <span class="overlay {{ 'available' if item.is_available else 'rented' }}">
+                {{ "DISPONÍVEL" if item.is_available else "ALUGADO" }}
+              </span>
+            </div>
+            <div class="vhs-face vhs-back"></div>
+            <div class="vhs-face vhs-right"></div>
+            <div class="vhs-face vhs-left"><span class="spine-title">{{ item.title }}</span></div>
+            <div class="vhs-face vhs-top"></div>
+            <div class="vhs-face vhs-bottom"></div>
+          </div>
+        </div>
+
+        <h3 class="item-title">{{ item.title }}</h3>
+
+        <p class="item-info">
+          {% if item.director %}FILME · Dir: {{ item.director }}{% endif %}
+          {% if item.platform %}JOGO · Plat: {{ item.platform }}{% endif %}
+        </p>
+
+        <form method="post" action="{{ url_for('items.rent_item', item_id=item.item_id) }}" class="rent-form">
+          <button type="submit" class="rent-btn" {% if not item.is_available %}disabled{% endif %}>
+            {{ "ALUGAR" if item.is_available else "INDISPONÍVEL" }}
+          </button>
+        </form>
+      </article>
+    {% endfor %}
+  </div>
 {% endblock %}
