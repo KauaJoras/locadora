@@ -14,14 +14,14 @@
         <div class="scene">
           <div class="vhs-box">
             <div class="vhs-face vhs-front">
-              <img src="{{ item.image }}" alt="Capa do {{ item.title }}" class="item-image">
+              <img src="{{ item.front_image or item.image }}" alt="Capa do {{ item.title }}" class="item-image">
               <span class="overlay {{ 'available' if item.is_available else 'rented' }}">
                 {{ "DISPONÍVEL" if item.is_available else "ALUGADO" }}
               </span>
             </div>
-            <div class="vhs-face vhs-back"></div>
-            <div class="vhs-face vhs-right"></div>
-            <div class="vhs-face vhs-left"><span class="spine-title">{{ item.title }}</span></div>
+            <div class="vhs-face vhs-back" style="background-image: linear-gradient(145deg, rgba(8, 10, 15, 0.15), rgba(8, 10, 15, 0.55)), url('{{ item.back_image or item.image }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+            <div class="vhs-face vhs-right" style="background-image: linear-gradient(90deg, rgba(8, 10, 15, 0.08), rgba(8, 10, 15, 0.65)), url('{{ item.side_image or item.image }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+            <div class="vhs-face vhs-left" style="background-image: linear-gradient(90deg, rgba(8, 10, 15, 0.20), rgba(8, 10, 15, 0.55)), url('{{ item.side_image or item.image }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"><span class="spine-title">{{ item.title }}</span></div>
             <div class="vhs-face vhs-top"></div>
             <div class="vhs-face vhs-bottom"></div>
           </div>

@@ -6,24 +6,46 @@ items_bp = Blueprint("items", __name__, url_prefix="/items")
 rentals = []
 
 # === FILMES ===
+front_url = "/static/images/pulp-fiction-front.jpg"
+side_url = "/static/images/pulp-fiction-side.jpg"
+back_url = "/static/images/pulp-fiction-back.jpg"
+
 pulp = Movie(1, "Pulp Fiction", "Tarantino")
-pulp.image = "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=500&q=80"
+pulp.image = front_url
+pulp.front_image = front_url
+pulp.side_image = side_url
+pulp.back_image = back_url
 
 her = Movie(2, "Her", "Spike Jonze")
-her.image = "https://images.unsplash.com/photo-1517602302552-471fe67acf66?auto=format&fit=crop&w=500&q=80"
+her.image = front_url
+her.front_image = front_url
+her.side_image = side_url
+her.back_image = back_url
 
 blade = Movie(3, "Blade Runner", "Ridley Scott")
-blade.image = "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=500&q=80"
+blade.image = front_url
+blade.front_image = front_url
+blade.side_image = side_url
+blade.back_image = back_url
 
 # === JOGOS ===
 gow = Game(4, "God of War", "PS2")
-gow.image = "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=500&q=80"
+gow.image = front_url
+gow.front_image = front_url
+gow.side_image = side_url
+gow.back_image = back_url
 
 sotn = Game(5, "Castlevania SOTN", "PS1")
-sotn.image = "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=500&q=80"
+sotn.image = front_url
+sotn.front_image = front_url
+sotn.side_image = side_url
+sotn.back_image = back_url
 
 zelda = Game(6, "Zelda Ocarina", "N64")
-zelda.image = "https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?auto=format&fit=crop&w=500&q=80"
+zelda.image = front_url
+zelda.front_image = front_url
+zelda.side_image = side_url
+zelda.back_image = back_url
 
 catalog = [pulp, her, blade, gow, sotn, zelda]
 rentals = []

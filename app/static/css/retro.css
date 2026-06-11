@@ -171,10 +171,10 @@ body::before {
    MÁGICA DO VHS 3D
    ============================================= */
 .scene {
-    width: 170px;
-    height: 240px;
-    margin: 8px auto 10px;
-    perspective: 1100px;
+    width: 190px;
+    height: 270px;
+    margin: 6px auto 12px;
+    perspective: 1200px;
 }
 
 .vhs-box {
@@ -205,27 +205,38 @@ body::before {
     background: #111; 
     border: 1px solid #333;
     box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+    overflow: hidden;
+}
+
+.vhs-face::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(145deg, rgba(255,255,255,0.08), transparent 30%, rgba(0,0,0,0.25) 100%);
+    mix-blend-mode: screen;
+    pointer-events: none;
 }
 
 /* Tamanhos das Faces da Caixa */
-.vhs-front, .vhs-back { width: 170px; height: 240px; }
-.vhs-right, .vhs-left { width: 42px; height: 240px; left: 64px; }
-.vhs-top, .vhs-bottom { width: 170px; height: 42px; top: 99px; }
+.vhs-front, .vhs-back { width: 190px; height: 270px; }
+.vhs-right, .vhs-left { width: 48px; height: 270px; left: 71px; }
+.vhs-top, .vhs-bottom { width: 190px; height: 48px; top: 111px; }
 
 /* "Dobrando" a caixa no espaço 3D */
-.vhs-front  { transform: rotateY(0deg) translateZ(21px); overflow: hidden; border-radius: 10px; }
-.vhs-back   { transform: rotateY(180deg) translateZ(21px); border-radius: 10px; background: linear-gradient(145deg, #121212, #232323); }
-.vhs-right  { transform: rotateY(90deg) translateZ(85px); background: #0c0d12; border-radius: 0 8px 8px 0; }
-.vhs-left   { transform: rotateY(-90deg) translateZ(85px); background: linear-gradient(180deg, #1b1930, #0f1320); display:flex; align-items:center; justify-content:center; border-radius: 8px 0 0 8px; }
-.vhs-top    { transform: rotateX(90deg) translateZ(120px); background: #080b12; border-radius: 8px; }
-.vhs-bottom { transform: rotateX(-90deg) translateZ(120px); background: #080b12; border-radius: 8px; }
+.vhs-front  { transform: rotateY(0deg) translateZ(24px); overflow: hidden; border-radius: 12px; }
+.vhs-back   { transform: rotateY(180deg) translateZ(24px); border-radius: 12px; background: linear-gradient(145deg, #121212, #232323); }
+.vhs-right  { transform: rotateY(90deg) translateZ(95px); background: #0c0d12; border-radius: 0 10px 10px 0; }
+.vhs-left   { transform: rotateY(-90deg) translateZ(95px); background: linear-gradient(180deg, #1b1930, #0f1320); display:flex; align-items:center; justify-content:center; border-radius: 10px 0 0 10px; }
+.vhs-top    { transform: rotateX(90deg) translateZ(135px); background: #080b12; border-radius: 10px; }
+.vhs-bottom { transform: rotateX(-90deg) translateZ(135px); background: #080b12; border-radius: 10px; }
 
 .vhs-front img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    filter: grayscale(18%) contrast(108%) brightness(92%);
+    filter: grayscale(10%) contrast(110%) brightness(96%);
 }
 
 .vhs-front .overlay {

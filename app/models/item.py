@@ -6,6 +6,10 @@ class Item(ABC):
         self.item_id = item_id
         self.title = title
         self.is_available = True
+        self.image = None
+        self.front_image = None
+        self.side_image = None
+        self.back_image = None
 
     @abstractmethod
     def rent(self, user) -> "Rental":
