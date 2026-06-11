@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: #16142a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    color: #4ade80;
+}
+
+/* Canvas de fundo — cobre tudo, fica atrás */
+#starCanvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+}
+
+/* A TV fica por cima do canvas */
+.crt-tv-container {
+    position: relative;
+    z-index: 10;
+    /* ... resto do CSS da TV que passamos antes ... */
+}
+
+/* Logo RetroVerso */
+.logo-retroverso {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 2.2rem;
+    letter-spacing: 4px;
+    background: linear-gradient(
+        90deg,
+        #ff4e4e 0%, #ff944e 12%, #ffe94e 25%,
+        #6eff6e 38%, #4edfff 52%, #6e6eff 65%,
+        #d44eff 78%, #ff4eaa 90%, #ff4e4e 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-text-stroke: 3px #1a1728;
+    paint-order: stroke fill;
+    filter: drop-shadow(0 0 10px rgba(180,100,255,0.5));
+}
+
+nav a {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6rem;
+    color: #ccd6f6;
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px rgba(150,200,255,0.6);
+}
+nav a:hover { color: #fff; }
